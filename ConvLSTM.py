@@ -69,10 +69,8 @@ def train(clstm_model, train_generator, test_generator, load_weights = False, st
     adam = tf.keras.optimizers.Adam(learning_rate=0.0003)
     clstm_model.compile(optimizer=adam, loss=root_mean_squared_error, metrics=[root_mean_squared_error, actual_rmse_loss])
     checkpoint = tf.keras.callbacks.ModelCheckpoint(f"convlstm_weights_pr.h5", monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-    tensorboard = tf.keras.callbacks.TensorBoard(log_dir=f"./Graphs/norm_csltm_pre_Graph", histogram_freq=0, write_graph=True, write_images=False)
     termnan = tf.keras.callbacks.TerminateOnNaN()
-    reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=15, min_delta=0.005, min_lr=0.000004, verbose=1)    
-    callbacks_list = [checkpoint,tensorboard, reduce_lr, termnan]
+    callbacks_list = [checkpoint, termnan]
     history = clstm_model.fit(
         train_generator, 
         callbacks=callbacks_list, 
