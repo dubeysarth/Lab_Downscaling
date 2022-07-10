@@ -68,13 +68,9 @@ def train(clstm_model, train_generator, test_generator, load_weights = False, st
         return K.sqrt(K.mean(K.square((y_pred - y_true)*std_observed)))
     adam = tf.keras.optimizers.Adam(learning_rate=0.0003)
     clstm_model.compile(optimizer=adam, loss=root_mean_squared_error, metrics=[root_mean_squared_error, actual_rmse_loss])
-    checkpoint = tf.keras.callbacks.ModelCheckpoint(f"convlstm_weights_pr.h5", monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-    termnan = tf.keras.callbacks.TerminateOnNaN()
-    callbacks_list = [checkpoint, termnan]
     history = clstm_model.fit(
         train_generator, 
-        callbacks=callbacks_list, 
-        epochs=32, 
+        epochs=16, 
         validation_data=test_generator,
         verbose=1
         )
