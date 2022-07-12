@@ -61,17 +61,22 @@ def data_generator(X,Y):
         )
     return train_generator, test_generator
 
-def train(clstm_model, train_generator, test_generator, load_weights = False, std_observed = 1.0):
+def train(clstm_model, train_generator, val_generator, load_weights = False, std_observed = 1.0, epochs = 16):
     def root_mean_squared_error(y_true, y_pred):
         return K.sqrt(K.mean(K.square(y_pred - y_true)))
     def actual_rmse_loss(y_true, y_pred):
         return K.sqrt(K.mean(K.square((y_pred - y_true)*std_observed)))
     adam = tf.keras.optimizers.Adam(learning_rate=0.0003)
     clstm_model.compile(optimizer=adam, loss=root_mean_squared_error, metrics=[root_mean_squared_error, actual_rmse_loss])
+    checkpoint = tf.keras.callbacks.ModelCheckpoint(f"convlstm_weights_pr_toy.h5", monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+    termnan = tf.keras.callbacks.TerminateOnNaN()
+    reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=15, min_delta=0.005, min_lr=0.000004, verbose=1)
+    callbacks_list = [checkpoint, reduce_lr, termnan]
     history = clstm_model.fit(
         train_generator, 
-        epochs=16, 
-        validation_data=test_generator,
+        callbacks=callbacks_list, 
+        epochs=epochs, 
+        validation_data=val_generator,
         verbose=1
         )
     return history
