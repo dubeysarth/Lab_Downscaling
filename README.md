@@ -4,7 +4,7 @@
 * The intention of this hands-on is to provide a quick starter into implementing climate model data and remote sensing data for ***Downscaling***. 
 
 * The notebook [*Downscaling.ipynb*](/Downscaling.ipynb) will cover the entire hands-on exercise end-to-end. It is recommended to execute on 
-[Google Colab](https://githubtocolab.com/acm-ds-summer-school-2022/practical/blob/main/day8/Downscaling.ipynb). For convenience, only the directory **day8** is set to be cloned within the notebook.
+[Google Colab](https://githubtocolab.com/dubeysarth/Lab_Downscaling/blob/main/Downscaling.ipynb). For convenience, only the directory **day8** is set to be cloned within the notebook.
 
 * Hyperlinks have been provided within the notebook pointing out the suggested literature.
 
