@@ -1,5 +1,7 @@
-# Day 8 Practical Session Materials
-## Deep Learning and computer vision models for generating high resolution climate projections
+# Deep Learning and computer vision models for generating high resolution climate projections
+
+## [ACM-IKDD Summer School on Data Science](https://github.com/acm-ds-summer-school-2022/practical) @ IIT Gandhinagar, Sponsored by ShareChat
+## [Day 8](https://github.com/acm-ds-summer-school-2022/practical/tree/main/day8) Practical Session Materials
 
 * The intention of this hands-on is to provide a quick starter into implementing climate model data and remote sensing data for ***Downscaling***. 
 
